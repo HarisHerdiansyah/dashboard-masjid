@@ -25,6 +25,12 @@ export const Outline: Story = {
   },
 }
 
+export const Secondary: Story = {
+  args: {
+    variant: 'secondary',
+  }
+}
+
 export const Destructive: Story = {
   args: {
     variant: 'destructive',
@@ -43,5 +49,11 @@ export const Icon: Story = {
     size: 'icon',
     'aria-label': 'Tambah item',
     children: '+',
+  },
+}
+
+export const Selected: Story = {
+  args: {
+    variant: 'selected',
   },
 }

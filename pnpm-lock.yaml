@@ -60,6 +60,9 @@ importers:
       '@storybook/addon-onboarding':
         specifier: ^10.6.0
         version: 10.6.0(storybook@10.6.0(@types/react@19.3.0)(react@19.3.0))
+      '@storybook/addon-themes':
+        specifier: ^10.6.0
+        version: 10.6.0(storybook@10.6.0(@types/react@19.3.0)(react@19.3.0))
       '@storybook/addon-vitest':
         specifier: ^10.6.0
         version: 10.6.0(@vitest/browser-playwright@5.0.1)(react@19.3.0)(storybook@10.6.0(@types/react@19.3.0)(react@19.3.0))(vitest@5.0.1)
@@ -1011,6 +1014,11 @@ packages:
 
   '@storybook/addon-onboarding@10.6.0':
     resolution: {integrity: sha512-zwe9lgCsq4ko/37CVgM9mZvaVV6WSO0k1IDTURof9B1CgHWzQ2Xn+5CYRVhbHie3mQ9bO1pcLI+ASdpdnOtSiQ==}
+    peerDependencies:
+      storybook: ^10.6.0
+
+  '@storybook/addon-themes@10.6.0':
+    resolution: {integrity: sha512-PJtRtaCzKCAcouEqkHevMwv0aeQNsYWab4K/qszNGuSyFXxdcPQguKwmbB6Ajd/FxW+Of/mLXjRgpjrGVSgm1g==}
     peerDependencies:
       storybook: ^10.6.0
 
@@ -4058,6 +4066,11 @@ snapshots:
   '@storybook/addon-onboarding@10.6.0(storybook@10.6.0(@types/react@19.3.0)(react@19.3.0))':
     dependencies:
       storybook: 10.6.0(@types/react@19.3.0)(react@19.3.0)
+
+  '@storybook/addon-themes@10.6.0(storybook@10.6.0(@types/react@19.3.0)(react@19.3.0))':
+    dependencies:
+      storybook: 10.6.0(@types/react@19.3.0)(react@19.3.0)
+      ts-dedent: 2.3.0
 
   '@storybook/addon-vitest@10.6.0(@vitest/browser-playwright@5.0.1)(react@19.3.0)(storybook@10.6.0(@types/react@19.3.0)(react@19.3.0))(vitest@5.0.1)':
     dependencies:
