@@ -10,33 +10,100 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as protectedRouteRouteImport } from './routes/(protected)/route'
+import { Route as protectedDashboardIndexRouteImport } from './routes/(protected)/dashboard/index'
+import { Route as protectedMediaIndexRouteImport } from './routes/(protected)/media/index'
+import { Route as protectedRunningTextIndexRouteImport } from './routes/(protected)/running-text/index'
+import { Route as protectedSettingsIndexRouteImport } from './routes/(protected)/settings/index'
+import { Route as protectedStudiesIndexRouteImport } from './routes/(protected)/studies/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const protectedRouteRoute = protectedRouteRouteImport.update({
+  id: '/(protected)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const protectedDashboardIndexRoute = protectedDashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedMediaIndexRoute = protectedMediaIndexRouteImport.update({
+  id: '/media/',
+  path: '/media/',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedRunningTextIndexRoute =
+  protectedRunningTextIndexRouteImport.update({
+    id: '/running-text/',
+    path: '/running-text/',
+    getParentRoute: () => protectedRouteRoute,
+  } as any)
+const protectedSettingsIndexRoute = protectedSettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedStudiesIndexRoute = protectedStudiesIndexRouteImport.update({
+  id: '/studies/',
+  path: '/studies/',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard/': typeof protectedDashboardIndexRoute
+  '/media/': typeof protectedMediaIndexRoute
+  '/running-text/': typeof protectedRunningTextIndexRoute
+  '/settings/': typeof protectedSettingsIndexRoute
+  '/studies/': typeof protectedStudiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof protectedDashboardIndexRoute
+  '/media': typeof protectedMediaIndexRoute
+  '/running-text': typeof protectedRunningTextIndexRoute
+  '/settings': typeof protectedSettingsIndexRoute
+  '/studies': typeof protectedStudiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/(protected)': typeof protectedRouteRouteWithChildren
+  '/(protected)/dashboard/': typeof protectedDashboardIndexRoute
+  '/(protected)/media/': typeof protectedMediaIndexRoute
+  '/(protected)/running-text/': typeof protectedRunningTextIndexRoute
+  '/(protected)/settings/': typeof protectedSettingsIndexRoute
+  '/(protected)/studies/': typeof protectedStudiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard/'
+    | '/media/'
+    | '/running-text/'
+    | '/settings/'
+    | '/studies/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/dashboard' | '/media' | '/running-text' | '/settings' | '/studies'
+  id:
+    | '__root__'
+    | '/'
+    | '/(protected)'
+    | '/(protected)/dashboard/'
+    | '/(protected)/media/'
+    | '/(protected)/running-text/'
+    | '/(protected)/settings/'
+    | '/(protected)/studies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  protectedRouteRoute: typeof protectedRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +115,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(protected)': {
+      id: '/(protected)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof protectedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(protected)/dashboard/': {
+      id: '/(protected)/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof protectedDashboardIndexRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/media/': {
+      id: '/(protected)/media/'
+      path: '/media'
+      fullPath: '/media/'
+      preLoaderRoute: typeof protectedMediaIndexRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/running-text/': {
+      id: '/(protected)/running-text/'
+      path: '/running-text'
+      fullPath: '/running-text/'
+      preLoaderRoute: typeof protectedRunningTextIndexRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/settings/': {
+      id: '/(protected)/settings/'
+      path: '/settings'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof protectedSettingsIndexRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/studies/': {
+      id: '/(protected)/studies/'
+      path: '/studies'
+      fullPath: '/studies/'
+      preLoaderRoute: typeof protectedStudiesIndexRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
   }
 }
 
+interface protectedRouteRouteChildren {
+  protectedDashboardIndexRoute: typeof protectedDashboardIndexRoute
+  protectedMediaIndexRoute: typeof protectedMediaIndexRoute
+  protectedRunningTextIndexRoute: typeof protectedRunningTextIndexRoute
+  protectedSettingsIndexRoute: typeof protectedSettingsIndexRoute
+  protectedStudiesIndexRoute: typeof protectedStudiesIndexRoute
+}
+
+const protectedRouteRouteChildren: protectedRouteRouteChildren = {
+  protectedDashboardIndexRoute: protectedDashboardIndexRoute,
+  protectedMediaIndexRoute: protectedMediaIndexRoute,
+  protectedRunningTextIndexRoute: protectedRunningTextIndexRoute,
+  protectedSettingsIndexRoute: protectedSettingsIndexRoute,
+  protectedStudiesIndexRoute: protectedStudiesIndexRoute,
+}
+
+const protectedRouteRouteWithChildren = protectedRouteRoute._addFileChildren(
+  protectedRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  protectedRouteRoute: protectedRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
